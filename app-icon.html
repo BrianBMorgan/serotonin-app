@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Serotonin App Icon</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            background: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+
+        .icon-container {
+            background: white;
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+
+        canvas {
+            display: block;
+            border-radius: 22.37%; /* iOS app icon radius */
+        }
+
+        .instructions {
+            max-width: 500px;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin: 10px;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        h2 {
+            color: #667eea;
+            margin-top: 0;
+        }
+
+        p {
+            color: #6B7280;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="icon-container">
+        <canvas id="icon" width="1024" height="1024"></canvas>
+    </div>
+
+    <div class="instructions">
+        <h2>📱 Serotonin App Icon</h2>
+        <p><strong>To save this icon:</strong></p>
+        <p>1. Long-press the icon above<br>
+        2. Tap "Save to Photos" or "Download Image"<br>
+        3. Use it in your Google OAuth submission</p>
+        <button onclick="downloadIcon()">Download Icon (PNG)</button>
+        <p style="font-size: 14px; margin-top: 20px;">1024x1024px - Optimized for app stores</p>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('icon');
+        const ctx = canvas.getContext('2d');
+
+        // Draw gradient background
+        const gradient = ctx.createLinearGradient(0, 0, 1024, 1024);
+        gradient.addColorStop(0, '#667eea');
+        gradient.addColorStop(1, '#764ba2');
+
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, 1024, 1024);
+
+        // Draw leaf/plant symbol (representing serotonin/nature/growth)
+        ctx.save();
+        ctx.translate(512, 512);
+
+        // Main leaf stem
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.9)';
+        ctx.lineWidth = 20;
+        ctx.lineCap = 'round';
+        ctx.lineJoin = 'round';
+
+        ctx.beginPath();
+        ctx.moveTo(0, 200);
+        ctx.lineTo(0, -200);
+        ctx.stroke();
+
+        // Left leaves
+        for (let i = 0; i < 3; i++) {
+            const y = -150 + (i * 100);
+            const curve = 80 + (i * 10);
+
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.85)';
+            ctx.beginPath();
+            ctx.moveTo(0, y);
+            ctx.bezierCurveTo(-curve, y - 30, -curve - 20, y - 60, -curve - 10, y - 80);
+            ctx.bezierCurveTo(-curve + 10, y - 70, -curve + 20, y - 50, 0, y - 40);
+            ctx.closePath();
+            ctx.fill();
+        }
+
+        // Right leaves
+        for (let i = 0; i < 3; i++) {
+            const y = -120 + (i * 100);
+            const curve = 75 + (i * 10);
+
+            ctx.fillStyle = 'rgba(255, 255, 255, 0.85)';
+            ctx.beginPath();
+            ctx.moveTo(0, y);
+            ctx.bezierCurveTo(curve, y - 30, curve + 20, y - 60, curve + 10, y - 80);
+            ctx.bezierCurveTo(curve - 10, y - 70, curve - 20, y - 50, 0, y - 40);
+            ctx.closePath();
+            ctx.fill();
+        }
+
+        // Top leaf
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.9)';
+        ctx.beginPath();
+        ctx.moveTo(0, -200);
+        ctx.bezierCurveTo(-30, -240, -20, -280, 0, -300);
+        ctx.bezierCurveTo(20, -280, 30, -240, 0, -200);
+        ctx.closePath();
+        ctx.fill();
+
+        ctx.restore();
+
+        // Add subtle shine effect
+        const shine = ctx.createRadialGradient(300, 300, 100, 300, 300, 800);
+        shine.addColorStop(0, 'rgba(255, 255, 255, 0.2)');
+        shine.addColorStop(1, 'rgba(255, 255, 255, 0)');
+        ctx.fillStyle = shine;
+        ctx.fillRect(0, 0, 1024, 1024);
+
+        function downloadIcon() {
+            const link = document.createElement('a');
+            link.download = 'serotonin-app-icon.png';
+            link.href = canvas.toDataURL();
+            link.click();
+        }
+    </script>
+</body>
+</html>
